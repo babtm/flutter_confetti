@@ -8,7 +8,7 @@ import 'enums/confetti_controller_state.dart';
 
 class ConfettiWidget extends StatefulWidget {
   const ConfettiWidget({
-    Key? key,
+    super.key,
     required this.confettiController,
     this.emissionFrequency = 0.02,
     this.numberOfParticles = 10,
@@ -38,8 +38,7 @@ class ConfettiWidget extends StatefulWidget {
         ),
         assert(gravity >= 0 && gravity <= 1,
             '`gravity` needs to be between 0 and 1'),
-        assert(strokeWidth >= 0, '`strokeWidth needs to be bigger than 0'),
-        super(key: key);
+        assert(strokeWidth >= 0, '`strokeWidth needs to be bigger than 0');
 
   /// Controls the animation.
   final ConfettiController confettiController;
@@ -136,7 +135,7 @@ class ConfettiWidget extends StatefulWidget {
   final Widget? child;
 
   @override
-  _ConfettiWidgetState createState() => _ConfettiWidgetState();
+  State<ConfettiWidget> createState() => _ConfettiWidgetState();
 }
 
 class _ConfettiWidgetState extends State<ConfettiWidget>
@@ -359,10 +358,17 @@ class ParticlePainter extends CustomPainter {
     _paintParticles(canvas);
   }
 
-  // TODO: seperate this
   void _paintEmitter(Canvas canvas) {
     const radius = 10.0;
+    drawCircle(canvas, radius);
+    drawCross(canvas, radius);
+  }
+  
+  void drawCircle(Canvas canvas, double radius) {
     canvas.drawCircle(Offset.zero, radius, _emitterPaint);
+  }
+  
+  void drawCross(Canvas canvas, double radius) {
     final path = Path()
       ..moveTo(0, -radius)
       ..lineTo(0, radius)

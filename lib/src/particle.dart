@@ -186,11 +186,11 @@ class ParticleSystem extends ChangeNotifier {
 
   Color _randomColor() {
     if (_colors != null) {
-      if (_colors!.length == 1) {
-        return _colors![0];
+      if (_colors.length == 1) {
+        return _colors[0];
       }
-      final index = _rand.nextInt(_colors!.length);
-      return _colors![index];
+      final index = _rand.nextInt(_colors.length);
+      return _colors[index];
     }
     return Helper.randomColor();
   }
